@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h3>Step 1: Get Formats</h3>
+  <form action="/formats" method="post">
+    YouTube URL: <input type="text" name="url" required>
+    <button type="submit">Fetch Formats</button>
+  </form>
+  <hr>
+  <h3>Step 2: Download & Trim</h3>
+  <form action="/process" method="post">
+    YouTube URL: <input type="text" name="url" required><br>
+    Format code (from above): <input type="text" name="format" required><br>
+    Trim start (optional): <input type="text" name="start" placeholder="5:34"><br>
+    Trim end (optional): <input type="text" name="end" placeholder="6:32"><br>
+    <button type="submit">Download + Process</button>
+  </form>
+</body>
+</html>
