@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 app.post('/formats', (req, res) => {
   const { url } = req.body;
   try {
-    const formats = execSync(`yt-dlp -F ${url}`).toString();
+    const formats = execSync(`yt-dlp -F ${url} --cookies cookies.txt`).toString();
     res.send(`<pre>${formats}</pre><a href="/">Go Back</a>`);
   } catch (err) {
     res.send(`Error: ${err.message}`);
@@ -47,10 +47,10 @@ app.post('/process', async (req, res) => {
 
   try {
     // Download video only
-    execSync(`yt-dlp -f ${format} -o "${videoPath}" ${url}`);
+    execSync(`yt-dlp --cookies cookies.txt -f ${format} -o "${videoPath}" ${url}`);
 
     // Download audio only (code 233)
-    execSync(`yt-dlp -f 233 -o "${audioPath}" ${url}`);
+    execSync(`yt-dlp --cookies cookies.txt -f 233 -o "${audioPath}" ${url}`);
 
     // Merge video and audio
     execSync(`ffmpeg -i "${videoPath}" -i "${audioPath}" -c copy "${mergedPath}"`);
